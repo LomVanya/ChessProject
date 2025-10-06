@@ -1,0 +1,17 @@
+<Window xmlns="https://github.com/avaloniaui"
+xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+x:Class="MyApp.MainWindow"
+Title="Шахматы (Avalonia)" Width="900" Height="900">
+<Grid RowDefinitions="Auto, *">
+<StackPanel Orientation="Horizontal" Margin="8">
+<Button Name="BtnNew" Content="Новая игра" Margin="4"/>
+<Button Name="BtnSave" Content="Сохранить" Margin="4"/>
+<Button Name="BtnLoad" Content="Загрузить" Margin="4"/>
+<TextBlock Name="TxtStatus" Text="" VerticalAlignment="Center" Margin="8,0"/>
+</StackPanel>
+
+<Grid Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+<Grid Name="BoardGrid" Width="800" Height="800"/>
+</Grid>
+</Grid>
+</Window>
