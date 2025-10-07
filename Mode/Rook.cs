@@ -5,7 +5,7 @@ namespace MyApp
     public class Rook : Figure
     {
         public Rook(PieceColor color) : base(color) { }
-        public override char ToChar() => 'R';
+        public override char ToChar() => '♜';
         public override bool IsValidMove(GameField board, int fr, int fc, int tr, int tc)
         {
             if (fr!=tr && fc!=tc) return false;

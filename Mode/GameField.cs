@@ -122,38 +122,70 @@ namespace MyApp
         public string SaveToString()
         {
             var sb = new StringBuilder();
-            sb.AppendLine(CurrentTurn==PieceColor.White?"w":"b");
-            for (int r=0;r<8;r++)
+            sb.AppendLine(CurrentTurn == PieceColor.White ? "w" : "b");
+
+            var figures = new List<string>();
+            for (int r = 0; r < 8; r++)
             {
-                for (int c=0;c<8;c++)
+                for (int c = 0; c < 8; c++)
                 {
-                    var f = Board[r,c];
-                    if (f==null) sb.Append('.');
-                    else
+                    var f = Board[r, c];
+                    if (f != null)
                     {
-                        char ch = f.ToChar();
-                        if (f.Color==PieceColor.White) ch = char.ToUpper(ch);
-                        else ch = char.ToLower(ch);
-                        sb.Append(ch);
+                        string type = f switch
+                        {
+                            Pawn => "P",
+                            Rook => "R",
+                            Knight => "N",
+                            Bishop => "B",
+                            Queen => "Q",
+                            King => "K",
+                            _ => "?"
+                        };
+                        string color = f.Color.ToString();
+                        figures.Add($"{r},{c},{type},{color}");
                     }
                 }
-                sb.AppendLine();
             }
+
+            sb.AppendLine(string.Join(";", figures));
             return sb.ToString();
         }
 
+
         public void LoadFromString(string s)
         {
-            var lines = s.Split(new[] { "\r\n","\n" }, StringSplitOptions.None).Where(l=>l.Length>0).ToArray();
-            if (lines.Length<9) return;
-            CurrentTurn = lines[0].Trim()=="w"?PieceColor.White:PieceColor.Black;
-            for (int r=0;r<8;r++)
-            for (int c=0;c<8;c++)
+            var lines = s.Split(new[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries);
+            if (lines.Length < 2) return;
+
+            CurrentTurn = lines[0] == "w" ? PieceColor.White : PieceColor.Black;
+
+            Board = new Figure[8, 8];
+
+            var figures = lines[1].Split(';', StringSplitOptions.RemoveEmptyEntries);
+            foreach (var item in figures)
             {
-                char ch = lines[1+r][c];
-                Board[r,c] = CharToPiece(ch);
+                var parts = item.Split(',');
+                if (parts.Length != 4) continue;
+
+                int r = int.Parse(parts[0]);
+                int c = int.Parse(parts[1]);
+                string type = parts[2];
+                PieceColor color = Enum.Parse<PieceColor>(parts[3]);
+
+                Board[r, c] = type switch
+                {
+                    "P" => new Pawn(color),
+                    "R" => new Rook(color),
+                    "N" => new Knight(color),
+                    "B" => new Bishop(color),
+                    "Q" => new Queen(color),
+                    "K" => new King(color),
+                    _ => null
+                };
             }
         }
+
 
         private Figure? CharToPiece(char ch)
         {
@@ -162,12 +194,12 @@ namespace MyApp
             ch = char.ToUpper(ch);
             return ch switch
             {
-                'P' => new Pawn(col),
-                'R' => new Rook(col),
-                'N' => new Knight(col),
-                'B' => new Bishop(col),
-                'Q' => new Queen(col),
-                'K' => new King(col),
+                '♟' => new Pawn(col),
+                '♜' => new Rook(col),
+                '♞' => new Knight(col),
+                '♝' => new Bishop(col),
+                '♛' => new Queen(col),
+                '♚' => new King(col),
                 _ => null
             };
         }

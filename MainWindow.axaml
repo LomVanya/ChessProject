@@ -1,17 +1,75 @@
 <Window xmlns="https://github.com/avaloniaui"
-xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-x:Class="MyApp.MainWindow"
-Title="Шахматы (Avalonia)" Width="900" Height="900">
-<Grid RowDefinitions="Auto, *">
-<StackPanel Orientation="Horizontal" Margin="8">
-<Button Name="BtnNew" Content="Новая игра" Margin="4"/>
-<Button Name="BtnSave" Content="Сохранить" Margin="4"/>
-<Button Name="BtnLoad" Content="Загрузить" Margin="4"/>
-<TextBlock Name="TxtStatus" Text="" VerticalAlignment="Center" Margin="8,0"/>
-</StackPanel>
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="MyApp.MainWindow"
+        Title="Шахматы (Avalonia)" Width="1000" Height="1020"
+        Background="#F4F4F6">
+  <Border CornerRadius="16"
+          Background="#FFFFFF"
+          Margin="16"
+          Padding="8"
+          Effect="drop-shadow(0 4 10 #00000040)"
+          ClipToBounds="True">
 
-<Grid Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-<Grid Name="BoardGrid" Width="800" Height="800"/>
-</Grid>
-</Grid>
+    <DockPanel LastChildFill="True">
+      <!-- HEADER -->
+      <Border Background="gray"
+              CornerRadius="12"
+              Margin="0,0,0,8"
+              DockPanel.Dock="Top"
+              Height="70">
+        <StackPanel Orientation="Horizontal"
+                    Margin="12"
+                    Spacing="10"
+                    VerticalAlignment="Center">
+
+          <StackPanel.Styles>
+            <Style Selector="Button">
+              <Setter Property="Background" Value="#FFFFFF"/>
+              <Setter Property="CornerRadius" Value="8"/>
+              <Setter Property="Transitions">
+                <Transitions>
+                  <DoubleTransition Property="Opacity" Duration="0:0:0.15"/>
+                  <BrushTransition Property="Background" Duration="0:0:0.2"/>
+                </Transitions>
+              </Setter>
+            </Style>
+            <Style Selector="Button:pointerover">
+                <Setter Property="Background" Value="#E8E8F2"/>
+            </Style>
+
+          </StackPanel.Styles>
+
+          <Button Name="BtnNew" Content="Новая игра" Margin="4" Width="120"/>
+          <Button Name="BtnSave" Content="Сохранить" Margin="4" Width="120"/>
+          <Button Name="BtnLoad" Content="Загрузить" Margin="4" Width="120"/>
+
+          <TextBlock Name="TxtTurn"
+                     Text="Ход: Белые"
+                     Foreground="White"
+                     FontSize="20"
+                     FontWeight="Bold"
+                     Margin="20,0"
+                     VerticalAlignment="Center"/>
+
+          <TextBlock Name="TxtStatus"
+                     Text=""
+                     Foreground="White"
+                     VerticalAlignment="Center"
+                     FontSize="16"/>
+        </StackPanel>
+      </Border>
+
+      <!-- BOARD AREA -->
+      <Border CornerRadius="12"
+              Background="#EDEDED"
+              Padding="10"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              ClipToBounds="True">
+
+        <Grid Name="BoardGrid" Width="415" Height="415"/>
+
+      </Border>
+    </DockPanel>
+  </Border>
 </Window>

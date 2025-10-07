@@ -5,7 +5,7 @@ namespace MyApp
     public class Bishop : Figure
     {
         public Bishop(PieceColor color) : base(color) { }
-        public override char ToChar() => 'B';
+        public override char ToChar() => '♝';
         public override bool IsValidMove(GameField board, int fr, int fc, int tr, int tc)
         {
             if (Math.Abs(fr-tr)!=Math.Abs(fc-tc)) return false;

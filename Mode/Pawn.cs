@@ -5,7 +5,7 @@ namespace MyApp
     public class Pawn : Figure
     {
         public Pawn(PieceColor color) : base(color) { }
-        public override char ToChar() => 'P';
+        public override char ToChar() => '♟';
 
         public override bool IsValidMove(GameField board, int fr, int fc, int tr, int tc)
         {

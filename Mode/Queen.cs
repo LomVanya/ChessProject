@@ -5,7 +5,7 @@ namespace MyApp
     public class Queen : Figure
     {
         public Queen(PieceColor color) : base(color) { }
-        public override char ToChar() => 'Q';
+        public override char ToChar() => '♛';
         public override bool IsValidMove(GameField board, int fr, int fc, int tr, int tc)
         {
             // rook-like

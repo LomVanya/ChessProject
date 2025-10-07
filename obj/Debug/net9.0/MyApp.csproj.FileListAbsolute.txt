@@ -71,3 +71,4 @@
 /Users/ivanlomejko/MyApp/obj/Debug/net9.0/MyApp.pdb
 /Users/ivanlomejko/MyApp/obj/Debug/net9.0/MyApp.genruntimeconfig.cache
 /Users/ivanlomejko/MyApp/obj/Debug/net9.0/ref/MyApp.dll
+/Users/ivanlomejko/MyApp/obj/Debug/net9.0/MyApp.sourcelink.json

@@ -5,7 +5,7 @@ namespace MyApp
     public class Knight : Figure
     {
         public Knight(PieceColor color) : base(color) { }
-        public override char ToChar() => 'N';
+        public override char ToChar() => '♞';
         public override bool IsValidMove(GameField board, int fr, int fc, int tr, int tc)
         {
             int dr = Math.Abs(fr-tr);
